@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react'
+import './List.css'
 
 const List  = ()=>{ 
   const [loading, setLoading] = useState(false)
@@ -12,6 +13,7 @@ const List  = ()=>{
     .then(response=>response.json())
     .then(data=>{
       console.log(data.currencies)
+      setLists(data.currencies)
       setLoading(false)
     })
     .catch(err=>{
@@ -26,7 +28,47 @@ const List  = ()=>{
         :(!loading && error) ? (<h2>Error ...</h2>) 
         :(
         <div>
-          Let's load the Data now
+          {
+                  <div className="table-container">
+                    <table class="table" width="100%">
+                      <thead>
+                        <tr>
+                          <th>Cryptocurrency</th>
+                          <th>Price</th>
+                          <th>Market Cap</th>
+                          <th>24H Change</th>
+                        </tr>
+                      </thead>
+                     
+                      <tbody>
+
+                       {
+                        lists.map(list=>{
+                          return(
+                            <tr>
+                              <td>
+                                <span style={{marginRight:'0.5rem'}}>{list.rank}</span>
+                                <span>{list.name}</span>
+                              </td>
+                              <td>
+                                <span>{list.price}</span>
+                              </td>
+                              <td>
+                                <span>{list.marketCap}</span>
+                              </td>
+                              <td>
+                                <span>{list.percentChange24h}</span>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                       
+                      </tbody>
+                    </table>
+                  </div>
+          }
+ 
         </div>
         ) 
       }
