@@ -1,11 +1,19 @@
 import React,{useEffect,useState} from 'react'
+import { ReactComponent as Loader } from './../common/Loader.svg';
 import './List.css'
 
+
+const showHourChange = (change)=>{
+    if(change > 0){
+      return <span style={{color:"green",fontWeight:'500'}}>Up</span>
+    }else if(change < 0){
+      return <span style={{color:"red",fontWeight:'500'}}>Down</span>
+    }
+  }
 const List  = ()=>{ 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [lists,setLists] = useState([])
-
 
   useEffect(()=>{
     setLoading(true)
@@ -24,7 +32,9 @@ const List  = ()=>{
   return(
     <main>
       {
-        (loading && !error) ? (<h2>Loading ...</h2>) 
+        (loading && !error) ? (<div style={{textAlign:'center'}}>
+                                  <Loader/>
+                              </div>) 
         :(!loading && error) ? (<h2>Error ...</h2>) 
         :(
         <div>
@@ -51,19 +61,19 @@ const List  = ()=>{
                                 <span>{list.name}</span>
                               </td>
                               <td>
-                                <span>{list.price}</span>
+                                <span>$ {list.price}</span>
                               </td>
                               <td>
                                 <span>{list.marketCap}</span>
                               </td>
                               <td>
-                                <span>{list.percentChange24h}</span>
+                                <span>$ {list.percentChange24h} {showHourChange(list.percentChange24h)}</span>
                               </td>
                             </tr>
                           )
                         })
                       }
-                       
+                   
                       </tbody>
                     </table>
                   </div>

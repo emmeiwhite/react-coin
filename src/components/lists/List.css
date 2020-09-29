@@ -2,16 +2,16 @@ table{
   background:#ccc;
   min-height:100%;
 }
-table thead{
+table thead tr{
   background:#777;
   padding:1rem 0;
-  border-bottom:1px solid #333;
+  /* border-bottom:1px solid #333; */
 }
 table thead tr th{
   text-align:left;
   color:#fff;
-  font-weight:400;
-  padding-left:1rem;
+  font-weight:600;
+  padding:1rem;
 }
 
 table tbody tr{
