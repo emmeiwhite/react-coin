@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./../../logo.svg";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import Search from "./../search/Search";
 
 export default function Header() {
   return (
@@ -13,6 +14,8 @@ export default function Header() {
       >
         <h1>Cryptocoin</h1>
       </Link>
+
+      <Search />
     </header>
   );
 }
