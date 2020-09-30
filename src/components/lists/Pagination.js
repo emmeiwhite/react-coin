@@ -12,6 +12,7 @@ const Pagination = ({
       <button
         className="pagination-button"
         onClick={() => handlePrevPage(currentPage)}
+        disabled={currentPage === 1}
       >
         &larr;
       </button>
@@ -23,6 +24,7 @@ const Pagination = ({
       <button
         className="pagination-button"
         onClick={() => handleNextPage(currentPage)}
+        disabled={currentPage === totalPages}
       >
         &rarr;
       </button>

@@ -13,19 +13,23 @@ const List = () => {
 
   // Adding Pagination and updating the Table Data
   const handlePrevPage = (prevPage) => {
-    if (prevPage === 1) {
-      setPage(totalPages);
-    } else {
-      setPage((prevPage) => prevPage - 1);
-    }
+    // if (prevPage === 1) {
+    //   setPage(totalPages);
+    // } else {
+    //   setPage((prevPage) => prevPage - 1);
+    // }
+
+    setPage((prevPage) => prevPage - 1);
   };
 
   const handleNextPage = (nextPage) => {
-    if (nextPage === totalPages) {
-      setPage(1);
-    } else {
-      setPage((nextPage) => nextPage + 1);
-    }
+    // if (nextPage === totalPages) {
+    //   setPage(1);
+    // } else {
+    //   setPage((nextPage) => nextPage + 1);
+    // }
+
+    setPage((nextPage) => nextPage + 1);
   };
 
   // Making API call to fetch data from the API EndPoint and also componentDidUpdate
