@@ -9,11 +9,23 @@ const Pagination = ({
 }) => {
   return (
     <div className="pagination-button-wrapper">
-      <button className="pagination-button">&larr;</button>
+      <button
+        className="pagination-button"
+        onClick={() => handlePrevPage(currentPage)}
+      >
+        &larr;
+      </button>
+
       <span className="pagination-page-info">
         Page {currentPage} of {totalPages}
       </span>
-      <button className="pagination-button">&rarr;</button>
+
+      <button
+        className="pagination-button"
+        onClick={() => handleNextPage(currentPage)}
+      >
+        &rarr;
+      </button>
     </div>
   );
 };

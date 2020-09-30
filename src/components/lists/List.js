@@ -28,7 +28,7 @@ const List = () => {
     }
   };
 
-  // Making API call to fetch data from the API EndPoint
+  // Making API call to fetch data from the API EndPoint and also componentDidUpdate
   useEffect(() => {
     setLoading(true);
     fetch(
@@ -50,7 +50,7 @@ const List = () => {
         setError(true);
         console.log(error);
       });
-  }, []);
+  }, [page]);
   return (
     <main>
       {loading && !error ? (
