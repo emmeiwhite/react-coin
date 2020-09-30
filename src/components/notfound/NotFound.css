@@ -1,0 +1,19 @@
+.notfound-wrapper {
+  height: calc(100vh - 88px);
+  background: #777;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notfound-text {
+  text-align: center;
+}
+.notfount-link {
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: orange;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./Table.css";
 
 import PropTypes from "prop-types";
@@ -11,7 +12,7 @@ const showHourChange = (change) => {
   }
 };
 
-const Table = ({ lists }) => {
+const Table = ({ lists, history }) => {
   return (
     <div className="table-container">
       <table className="table" width="100%">
@@ -27,7 +28,13 @@ const Table = ({ lists }) => {
         <tbody>
           {lists.map((list) => {
             return (
-              <tr key={list.id}>
+              <tr
+                key={list.id}
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  history.push(`/details/${list.id}`);
+                }}
+              >
                 <td>
                   <span style={{ marginRight: "0.5rem" }}>{list.rank}</span>
                   <span>{list.name}</span>
@@ -57,4 +64,4 @@ Table.propTypes = {
   lists: PropTypes.array.isRequired,
 };
 
-export default Table;
+export default withRouter(Table);
