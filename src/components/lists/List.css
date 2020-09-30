@@ -1,0 +1,7 @@
+.list-loader {
+  height: calc(100vh -89px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: teal;
+}

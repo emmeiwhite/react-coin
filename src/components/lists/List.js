@@ -35,9 +35,7 @@ const List = () => {
   // Making API call to fetch data from the API EndPoint and also componentDidUpdate
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://api.udilia.com/coins/v1/cryptocurrencies?page=${page}&perPage=20`
-    )
+    fetch(`https://api.udilia.com/coins/v1/cryptocurrencies?${page}&perPage=20`)
       .then((response) => response.json())
       .then((data) => {
         console.log("Total Data :");
@@ -58,7 +56,7 @@ const List = () => {
   return (
     <main>
       {loading && !error ? (
-        <div style={{ textAlign: "center" }}>
+        <div className="list-loader">
           <Loader />
         </div>
       ) : !loading && error ? (
