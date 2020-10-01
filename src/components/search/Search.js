@@ -5,42 +5,37 @@ import { ReactComponent as SearchLogo } from "./../common/Search.svg";
 
 const API_URL = `https://api.udilia.com/coins/v1/`;
 
-// autocomplete?searchQuery=bit
 const Search = () => {
   const [currencyCoins, setCurrencyCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
+  /** Function */
   const handleChange = (e) => {
+    const queryTyped = e.target.value;
+    setSearchQuery({ searchQuery: queryTyped });
+    // Before sending API request, we will set loading to true
     setLoading(true);
-    const searchQuery = e.target.value;
 
-    setSearchQuery({ searchQuery });
-
-    // If searchQuery isn't present, don't send request to the server
-    if (!searchQuery) {
-      return "";
-    }
-
-    fetch(`${API_URL}autocomplete?searchQuery=${searchQuery}`)
-      .then((response) => {
-        return response.json();
-      })
+    fetch(`${API_URL}autocomplete?searchQuery=${queryTyped}`)
+      .then((response) => response.json())
       .then((data) => {
-        setLoading(false);
-        console.log("**** Data Received from coins *****", data);
         setCurrencyCoins(data);
+        setLoading(false);
       })
       .catch((error) => {
         setError(true);
         setLoading(false);
-        console.log("************ Error ***********", error);
       });
   };
 
-  // The data from the 3rd API so far comes here, HELPER FUNCTION to render ELement
+  // The data from the 3rd API so far comes here, HELPER FUNCTION to render ELement on condition
   const getSearchResult = () => {
+    if (!searchQuery) {
+      return "";
+    }
+
     if (currencyCoins.length > 0) {
       return (
         <div className="currency-coin-wrapper">
@@ -56,7 +51,7 @@ const Search = () => {
     }
 
     // When currencyCoins are not present
-    if (!loading) {
+    if (!loading && currencyCoins.length === 0) {
       return (
         <div className="currency-coin-wrapper">
           <div className="currency-coin-data">
@@ -67,6 +62,7 @@ const Search = () => {
     }
   };
 
+  // Component's return Function
   return (
     <div className="search-wrapper">
       <div className="search-wrapper-input">
@@ -85,7 +81,7 @@ const Search = () => {
 
       {/* --- Search Result --- */}
 
-      {searchQuery && getSearchResult()}
+      {getSearchResult()}
     </div>
   );
 };
