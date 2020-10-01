@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import "./Search.css";
 import { ReactComponent as Loader } from "./../common/Loader.svg";
 import { ReactComponent as SearchLogo } from "./../common/Search.svg";
 
 const API_URL = `https://api.udilia.com/coins/v1/`;
 
-const Search = () => {
+const Search = ({ history }) => {
   const [currencyCoins, setCurrencyCoins] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  /** Function */
-  const handleChange = (e) => {
+  /** 1) Function 1: handleSearchChange */
+  const handleSearchChange = (e) => {
     const queryTyped = e.target.value;
-    setSearchQuery({ searchQuery: queryTyped });
+    setSearchQuery(queryTyped);
     // Before sending API request, we will set loading to true
     setLoading(true);
 
@@ -25,12 +26,19 @@ const Search = () => {
         setLoading(false);
       })
       .catch((error) => {
-        setError(true);
+        // setError(true);
         setLoading(false);
       });
   };
 
-  // The data from the 3rd API so far comes here, HELPER FUNCTION to render ELement on condition
+  /** 3) Function 3: Redirecting to the Detail Page */
+  const handleRedirectDetail = (currencyId) => {
+    setCurrencyCoins([]);
+    setSearchQuery("");
+    history.push(`/details/${currencyId}`);
+  };
+
+  /** 2) Function 2:  Getting Currencies  : HELPER FUNCTION */
   const getSearchResult = () => {
     if (!searchQuery) {
       return "";
@@ -41,7 +49,11 @@ const Search = () => {
         <div className="currency-coin-wrapper">
           {currencyCoins.map((currency) => {
             return (
-              <div className="currency-coin-data" key={currency.id}>
+              <div
+                className="currency-coin-data"
+                key={currency.id}
+                onClick={() => handleRedirectDetail(currency.id)}
+              >
                 {currency.name} ({currency.symbol})
               </div>
             );
@@ -73,7 +85,8 @@ const Search = () => {
         <input
           type="text"
           placeholder="Currency name"
-          onChange={handleChange}
+          onChange={handleSearchChange}
+          value={searchQuery}
         />
 
         <span>{loading && <Loader height={25} />}</span>
@@ -86,4 +99,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default withRouter(Search);

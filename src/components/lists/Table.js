@@ -4,15 +4,16 @@ import "./Table.css";
 
 import PropTypes from "prop-types";
 
-const showHourChange = (change) => {
-  if (change > 0) {
-    return <span style={{ color: "green", fontWeight: "500" }}>Up</span>;
-  } else if (change < 0) {
-    return <span style={{ color: "red", fontWeight: "500" }}>Down</span>;
-  }
-};
-
 const Table = ({ lists, history }) => {
+  // HELPER METHOD
+  const showHourChange = (change) => {
+    if (change > 0) {
+      return <span style={{ color: "green", fontWeight: "500" }}>Up</span>;
+    } else if (change < 0) {
+      return <span style={{ color: "red", fontWeight: "500" }}>Down</span>;
+    }
+  };
+
   if (lists.length > 0) {
     return (
       <div className="table-container">

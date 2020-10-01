@@ -3,9 +3,12 @@ import { withRouter } from "react-router-dom";
 import "./Detail.css";
 
 const Detail = ({ id, match, location, history }) => {
+  console.log("****************** LOCATION.PATHNAME ***************");
+  console.log(location.pathname);
   const [currencyData, setCurrencyData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [pathName, setPathName] = useState(location.pathname);
 
   useEffect(() => {
     fetch(
@@ -22,7 +25,7 @@ const Detail = ({ id, match, location, history }) => {
         console.log("Error", error);
         setError(true);
       });
-  }, []);
+  }, [pathName]);
 
   return (
     <div className="detail-wrapper">
